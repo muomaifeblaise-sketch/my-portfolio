@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Muomaife Justin — Full-stack developer building complete, production-ready web applications with PHP, React, and Node.js." />
+    <title>Muomaife Justin — Full-Stack Developer</title>
+
+    <!-- Bootstrap 5.3 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+    <style>
+        /* ═══════════════════════════════════════════════
+           TOKENS
+        ═══════════════════════════════════════════════ */
+        :root {
+            --navy: #002147;
+            --navy-mid: #002d60;
+            --navy-light: #003880;
+            --navy-deep: #001530;
+            --tan: #d2b48c;
+            --tan-light: #e8d5b7;
+            --tan-dark: #a8865c;
+            --tan-faint: rgba(210, 180, 140, .12);
+            --white: #f5f0e8;
+            --white-muted: rgba(245, 240, 232, .65);
+            --white-faint: rgba(245, 240, 232, .35);
+            --glass-bg: rgba(0, 33, 71, .5);
+            --glass-border: rgba(210, 180, 140, .18);
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+            --easing: cubic-bezier(.4, 0, .2, 1);
+            --trans: .3s var(--easing);
+        }
+
+        /* ═══════════════════════════════════════════════
+           RESET / BASE
+        ═══════════════════════════════════════════════ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        body {
+            background: var(--navy-deep);
+            color: var(--white);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ═══════════════════════════════════════════════
+           SCROLL RAIL (from original)
+        ═══════════════════════════════════════════════ */
+        .jn-scroll-rail {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .jn-scroll-rail__dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--white-faint);
+            transition: background .4s, transform .4s;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .jn-scroll-rail__dot.active {
+            background: var(--tan);
+            transform: scale(1.4);
+            border-color: var(--tan);
+        }
+        .jn-scroll-rail__line {
+            width: 1px;
+            height: 18px;
+            background: var(--white-faint);
+            opacity: .25;
+        }
+        @media(max-width:991px) {
+            .jn-scroll-rail {
+                display: none !important;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════
+           NAV
+        ═══════════════════════════════════════════════ */
+        .jn-nav {
+            padding: 1rem clamp(1.25rem, 5vw, 5rem);
+            background: rgba(0, 21, 48, .7);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: background .3s;
+        }
+        .jn-nav.scrolled {
+            background: rgba(0, 21, 48, .92);
+        }
+        .jn-nav__logo {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--tan);
+            letter-spacing: .06em;
+        }
+        .jn-nav__link {
+            font-size: .78rem;
+            font-weight: 400;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--white-muted);
+            transition: color var(--trans);
+            padding: .4rem 0;
+            position: relative;
+        }
+        .jn-nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--tan);
+            transition: width var(--trans);
+        }
+        .jn-nav__link:hover {
+            color: var(--white);
+        }
+        .jn-nav__link:hover::after {
+            width: 100%;
+        }
+        .jn-hamburger {
+            border: none;
+            background: transparent;
+            padding: .4rem .2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .jn-hamburger__line {
+            display: block;
+            width: 26px;
+            height: 1.5px;
+            background: var(--white);
+            transition: var(--trans);
+        }
+        .jn-hamburger[aria-expanded="true"] .jn-hamburger__line:nth-child(1) {
+            transform: rotate(45deg) translate(4px, 4px);
+        }
+        .jn-hamburger[aria-expanded="true"] .jn-hamburger__line:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        /* ═══════════════════════════════════════════════
+           HERO
+        ═══════════════════════════════════════════════ */
+        .jn-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 8rem clamp(1.25rem, 5vw, 5rem) 4rem;
+            overflow: hidden;
+        }
+        .jn-hero__grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(210, 180, 140, .035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(210, 180, 140, .035) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .jn-hero__content {
+            position: relative;
+            z-index: 1;
+        }
+        .jn-eyebrow {
+            font-size: .7rem;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--tan-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+        }
+        .jn-eyebrow__line {
+            width: 44px;
+            height: 1px;
+            background: var(--tan-dark);
+            display: inline-block;
+        }
+        .jn-hero__headline {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.05;
+            color: var(--white);
+            margin-bottom: 1.2rem;
+        }
+        .jn-hero__headline em {
+            font-style: italic;
+            color: var(--tan);
+        }
+        .jn-hero__sub {
+            font-size: clamp(.95rem, 1.4vw, 1.1rem);
+            color: var(--white-muted);
+            max-width: 540px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        .jn-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .7rem 2rem;
+            border-radius: 999px;
+            font-size: .78rem;
+            font-weight: 500;
+            letter-spacing: .06em;
+            transition: var(--trans);
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+        .jn-btn--primary {
+            background: var(--tan);
+            color: var(--navy-deep);
+            border-color: var(--tan);
+        }
+        .jn-btn--primary:hover {
+            background: var(--tan-light);
+            border-color: var(--tan-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(210, 180, 140, .2);
+        }
+        .jn-btn--outline {
+            background: transparent;
+            color: var(--white);
+            border-color: var(--white-faint);
+        }
+        .jn-btn--outline:hover {
+            border-color: var(--tan);
+            color: var(--tan);
+            transform: translateY(-2px);
+        }
+        .jn-hero__stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem 4rem;
+            margin-top: 3rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--glass-border);
+        }
+        .jn-stat-item {
+            text-align: center;
+        }
+        .jn-stat-item__num {
+            font-family: var(--font-display);
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--tan);
+            line-height: 1;
+        }
+        .jn-stat-item__label {
+            font-size: .7rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--white-faint);
+            margin-top: .3rem;
+        }
+
+        /* ── Scroll hint ── */
+        .jn-scroll-hint {
+            margin-top: 3rem;
+            opacity: .4;
+            animation: bob 2.4s ease-in-out infinite;
+        }
+        @keyframes bob {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(8px);
+            }
+        }
+        .jn-scroll-hint__wheel {
+            animation: wheelPulse 2.4s ease-in-out infinite;
+        }
+        @keyframes wheelPulse {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .2;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════
+           SECTION COMMON
+        ═══════════════════════════════════════════════ */
+        .jn-section {
+            padding: 5rem clamp(1.25rem, 5vw, 5rem);
+            position: relative;
+        }
+        .jn-section--alt {
+            background: rgba(0, 33, 71, .25);
+        }
+        .jn-section__header {
+            margin-bottom: 3rem;
+        }
+        .jn-label {
+            font-size: .65rem;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--tan-dark);
+            display: inline-block;
+            margin-bottom: .4rem;
+        }
+        .jn-section__title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--white);
+        }
+        .jn-section__title em {
+            font-style: italic;
+            color: var(--tan);
+        }
+        .jn-rule {
+            width: 48px;
+            height: 1px;
+            background: var(--tan-dark);
+            margin: 1rem 0 1.2rem;
+        }
+        .jn-rule--center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .jn-section__desc {
+            font-size: .95rem;
+            color: var(--white-muted);
+            max-width: 560px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* ═══════════════════════════════════════════════
+           ABOUT
+        ═══════════════════════════════════════════════ */
+        .jn-about__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .jn-about__text p {
+            color: var(--white-muted);
+            line-height: 1.9;
+            font-size: .95rem;
+            margin-bottom: 1.2rem;
+        }
+        .jn-about__text p:last-child {
+            margin-bottom: 0;
+        }
+        .jn-about__pill {
+            display: inline-block;
+            padding: .2rem 1rem;
+            border-radius: 999px;
+            border: 1px solid var(--glass-border);
+            font-size: .7rem;
+            letter-spacing: .06em;
+            color: var(--white-faint);
+            margin-right: .5rem;
+            margin-bottom: .5rem;
+        }
+        .jn-about__dual {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .jn-about__dual-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            padding: 1.6rem 1.8rem;
+            transition: border-color var(--trans), transform var(--trans);
+        }
+        .jn-about__dual-item:hover {
+            border-color: rgba(210, 180, 140, .3);
+            transform: translateY(-2px);
+        }
+        .jn-about__dual-item .tag {
+            font-size: .58rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--tan-dark);
+            font-weight: 500;
+        }
+        .jn-about__dual-item h4 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--white);
+            margin: .3rem 0 .4rem;
+        }
+        .jn-about__dual-item p {
+            font-size: .85rem;
+            color: var(--white-muted);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        @media(max-width:768px) {
+            .jn-about__grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════
+           SERVICES / SKILLS
+        ═══════════════════════════════════════════════ */
+        .jn-services__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+            gap: 1.5rem;
+        }
+        .jn-service-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            padding: 2rem 1.6rem;
+            text-align: center;
+            transition: border-color var(--trans), transform var(--trans);
+        }
+        .jn-service-card:hover {
+            border-color: rgba(210, 180, 140, .3);
+            transform: translateY(-4px);
+        }
+        .jn-service-card__icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto .8rem;
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--tan);
+        }
+        .jn-service-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: .3rem;
+        }
+        .jn-service-card p {
+            font-size: .82rem;
+            color: var(--white-muted);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* ═══════════════════════════════════════════════
+           PROJECTS
+        ═══════════════════════════════════════════════ */
+        .jn-projects__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .jn-project {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            padding: 2rem;
+            transition: border-color var(--trans), transform var(--trans);
+            display: flex;
+            flex-direction: column;
+        }
+        .jn-project:hover {
+            border-color: rgba(210, 180, 140, .3);
+            transform: translateY(-4px);
+        }
+        .jn-project__num {
+            font-family: var(--font-display);
+            font-size: 2.6rem;
+            font-weight: 300;
+            color: var(--tan-faint);
+            line-height: 1;
+            margin-bottom: .2rem;
+        }
+        .jn-project__type {
+            font-size: .6rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--tan-dark);
+            font-weight: 500;
+        }
+        .jn-project h3 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--white);
+            margin: .2rem 0 .1rem;
+        }
+        .jn-project__sub {
+            font-style: italic;
+            color: var(--tan);
+            font-size: .9rem;
+            font-family: var(--font-display);
+        }
+        .jn-project__desc {
+            font-size: .85rem;
+            color: var(--white-muted);
+            line-height: 1.8;
+            margin: .8rem 0 1rem;
+            flex: 1;
+        }
+        .jn-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .4rem;
+            margin-top: auto;
+        }
+        .jn-stack__pill {
+            font-size: .62rem;
+            font-weight: 500;
+            letter-spacing: .04em;
+            padding: .2rem .8rem;
+            border-radius: 999px;
+            background: rgba(210, 180, 140, .07);
+            border: 1px solid rgba(210, 180, 140, .15);
+            color: var(--tan-light);
+        }
+        .jn-project__link {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            margin-top: 1.2rem;
+            font-size: .75rem;
+            font-weight: 500;
+            letter-spacing: .06em;
+            color: var(--tan);
+            transition: gap var(--trans);
+        }
+        .jn-project__link:hover {
+            gap: .9rem;
+        }
+        .jn-project__link svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        @media(max-width:768px) {
+            .jn-projects__grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════
+           CONTACT
+        ═══════════════════════════════════════════════ */
+        .jn-contact__wrap {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .jn-contact__intro {
+            font-size: .95rem;
+            color: var(--white-muted);
+            line-height: 1.8;
+            max-width: 420px;
+        }
+        .jn-contact__socials {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.8rem;
+            flex-wrap: wrap;
+        }
+        .jn-contact__social {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .78rem;
+            font-weight: 400;
+            color: var(--white-muted);
+            transition: color var(--trans);
+        }
+        .jn-contact__social:hover {
+            color: var(--tan);
+        }
+        .jn-contact__social svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .jn-form__group {
+            margin-bottom: 1.2rem;
+        }
+        .jn-form__label {
+            font-size: .7rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--white-faint);
+            display: block;
+            margin-bottom: .3rem;
+            font-weight: 500;
+        }
+        .jn-form__input {
+            width: 100%;
+            padding: .7rem 1rem;
+            border-radius: 4px;
+            border: 1px solid var(--glass-border);
+            background: rgba(0, 33, 71, .35);
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: .9rem;
+            transition: border-color var(--trans);
+            outline: none;
+        }
+        .jn-form__input:focus {
+            border-color: var(--tan);
+        }
+        .jn-form__input::placeholder {
+            color: var(--white-faint);
+            font-weight: 300;
+            font-size: .85rem;
+        }
+        .jn-form__textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .jn-form select.jn-form__input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23d2b48c' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            cursor: pointer;
+        }
+        .jn-form select.jn-form__input option {
+            background: var(--navy-deep);
+            color: var(--white);
+        }
+
+        .jn-alert {
+            padding: .8rem 1.2rem;
+            border-radius: 4px;
+            font-size: .85rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid transparent;
+        }
+        .jn-alert--success {
+            background: rgba(0, 229, 160, .08);
+            border-color: rgba(0, 229, 160, .2);
+            color: #00e5a0;
+        }
+        .jn-alert--error {
+            background: rgba(255, 60, 60, .08);
+            border-color: rgba(255, 60, 60, .2);
+            color: #ff6b6b;
+        }
+
+        /* ═══════════════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════════════ */
+        .jn-footer {
+            padding: 2.5rem clamp(1.25rem, 5vw, 5rem);
+            border-top: 1px solid var(--glass-border);
+        }
+        .jn-footer__inner {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .jn-footer__logo {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--tan);
+        }
+        .jn-footer__copy {
+            font-size: .75rem;
+            color: var(--white-faint);
+        }
+        .jn-footer__links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .jn-footer__links a {
+            font-size: .72rem;
+            letter-spacing: .06em;
+            color: var(--white-faint);
+            transition: color var(--trans);
+        }
+        .jn-footer__links a:hover {
+            color: var(--tan);
+        }
+
+        /* ═══════════════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════════ */
+        @media(max-width:991px) {
+            .jn-contact__wrap {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .jn-hero__stats {
+                gap: 1.5rem 2.5rem;
+            }
+        }
+        @media(max-width:576px) {
+            .jn-hero__headline {
+                font-size: 2.4rem;
+            }
+            .jn-hero__stats {
+                gap: 1rem 1.8rem;
+            }
+            .jn-stat-item__num {
+                font-size: 1.8rem;
+            }
+            .jn-section {
+                padding: 3rem 1rem;
+            }
+            .jn-project {
+                padding: 1.4rem;
+            }
+        }
+
+        /* ── AOS overrides ── */
+        [data-aos] {
+            pointer-events: none;
+        }
+        [data-aos].aos-animate {
+            pointer-events: auto;
+        }
+
+        /* ── smooth nav link offset ── */
+        .anchor-offset {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════════════════
+    NAV
+    ═══════════════════════════════════════════════ -->
+    <nav class="jn-nav navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container-fluid px-4 px-lg-5">
+            <a class="jn-nav__logo navbar-brand" href="#hero">Justin.</a>
+            <button class="navbar-toggler jn-hamburger" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navMenu"
+            aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="jn-hamburger__line"></span>
+            <span class="jn-hamburger__line"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto gap-lg-4 gap-2">
+                <li class="nav-item"><a class="jn-nav__link nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="jn-nav__link nav-link" href="#services">Services</a></li>
+                <li class="nav-item"><a class="jn-nav__link nav-link" href="#projects">Projects</a></li>
+                <li class="nav-item"><a class="jn-nav__link nav-link" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+SCROLL RAIL
+═══════════════════════════════════════════════ -->
+<div class="jn-scroll-rail" aria-hidden="true">
+    <div class="jn-scroll-rail__dot active" data-index="0"></div>
+    <div class="jn-scroll-rail__line"></div>
+    <div class="jn-scroll-rail__dot" data-index="1"></div>
+    <div class="jn-scroll-rail__line"></div>
+    <div class="jn-scroll-rail__dot" data-index="2"></div>
+    <div class="jn-scroll-rail__line"></div>
+    <div class="jn-scroll-rail__dot" data-index="3"></div>
+    <div class="jn-scroll-rail__line"></div>
+    <div class="jn-scroll-rail__dot" data-index="4"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+HERO
+═══════════════════════════════════════════════ -->
+<section class="jn-hero" id="hero">
+    <div class="jn-hero__grid" aria-hidden="true"></div>
+
+    <div class="container-fluid px-4 px-lg-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8 text-center jn-hero__content">
+
+                <p class="jn-eyebrow" data-aos="fade-down" data-aos-duration="700">
+                    <span class="jn-eyebrow__line"></span>
+                    Full-Stack Developer &amp; Vibecoder
+                    <span class="jn-eyebrow__line"></span>
+                </p>
+
+                <h1 class="jn-hero__headline" data-aos="fade-up" data-aos-duration="900" data-aos-delay="100">
+                    Muomaife Justin<br>
+                    <em>Full-Stack</em> Developer
+                </h1>
+
+                <p class="jn-hero__sub" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
+                    I build complete, working web applications — from database to interface —
+                    using PHP, React, Node.js, and modern JavaScript. Currently studying Software
+                    Engineering at Lincoln University Malaysia, Nigeria branch.
+                </p>
+
+                <div class="jn-hero__ctas d-flex flex-wrap gap-3 justify-content-center"
+                data-aos="fade-up" data-aos-duration="700" data-aos-delay="300">
+                <a href="#contact" class="jn-btn jn-btn--primary">Start a Project</a>
+                <a href="#projects" class="jn-btn jn-btn--outline">View My Work</a>
+            </div>
+
+            <!-- Stats -->
+            <div class="jn-hero__stats" data-aos="fade-up" data-aos-delay="400">
+                <div class="jn-stat-item">
+                    <div class="jn-stat-item__num">12+</div>
+                    <div class="jn-stat-item__label">Projects Delivered</div>
+                </div>
+                <div class="jn-stat-item">
+                    <div class="jn-stat-item__num">100%</div>
+                    <div class="jn-stat-item__label">Client Satisfaction</div>
+                </div>
+                <div class="jn-stat-item">
+                    <div class="jn-stat-item__num">3×</div>
+                    <div class="jn-stat-item__label">Delivery Speed</div>
+                </div>
+            </div>
+
+            <!-- Scroll hint -->
+            <div class="jn-scroll-hint" data-aos="fade-up" data-aos-delay="500">
+                <svg width="20" height="32" viewBox="0 0 20 32" fill="none" aria-hidden="true">
+                    <rect x="1" y="1" width="18" height="30" rx="9" stroke="currentColor" stroke-width="1"/>
+                    <rect class="jn-scroll-hint__wheel" x="9" y="6" width="2" height="6" rx="1" fill="currentColor"/>
+                </svg>
+            </div>
+
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+ABOUT
+═══════════════════════════════════════════════ -->
+<section class="jn-section anchor-offset" id="about">
+    <div class="container-fluid px-4 px-lg-5">
+
+        <div class="jn-section__header" data-aos="fade-up">
+            <span class="jn-label">About Me</span>
+            <h2 class="jn-section__title">Full-Stack, <em>Fast-Moving</em></h2>
+            <div class="jn-rule"></div>
+        </div>
+
+        <div class="jn-about__grid">
+
+            <div class="jn-about__text" data-aos="fade-right">
+                <p>
+                    I'm Muomaife Justin, a full-stack developer and Software Engineering student
+                    at Lincoln University Malaysia, Nigeria branch. I build complete web applications
+                    end to end — frontend, backend, and database — using PHP, React, Node.js, JavaScript,
+                    Bootstrap, and HTML.
+                </p>
+                <p>
+                    I describe myself as a vibecoder: I move fast and lean on AI tools to speed up
+                    development, but every project I take on ships as a fully working system, not
+                    just a prototype. My work spans lead-generation platforms, restaurant management
+                    systems, e-commerce sites, and mobile apps — built for real clients and deployed
+                    to production.
+                </p>
+                <div style="margin-top:1.2rem;">
+                    <span class="jn-about__pill">PHP</span>
+                    <span class="jn-about__pill">React</span>
+                    <span class="jn-about__pill">Node.js</span>
+                    <span class="jn-about__pill">JavaScript</span>
+                    <span class="jn-about__pill">Bootstrap</span>
+                    <span class="jn-about__pill">MySQL</span>
+                </div>
+            </div>
+
+            <div class="jn-about__dual" data-aos="fade-left">
+
+                <div class="jn-about__dual-item">
+                    <div class="tag">✦ Full-Stack Range</div>
+                    <h4>Frontend to Backend</h4>
+                    <p>
+                        From responsive interfaces in React and Bootstrap to backend systems in
+                        PHP and Node.js, I handle the full stack — databases, APIs, authentication,
+                        and deployment included.
+                    </p>
+                </div>
+
+                <div class="jn-about__dual-item">
+                    <div class="tag">✦ Speed &amp; AI-Assisted Workflow</div>
+                    <h4>Vibecoding, Seriously</h4>
+                    <p>
+                        I use AI tools to move faster without cutting corners. Every product I ship —
+                        from lead-generation platforms to restaurant management systems — is a
+                        complete, working system, not a proof of concept.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Bridge quote -->
+        <div class="jn-bridge mt-5" data-aos="fade-up" data-aos-delay="200" style="text-align:center;border-top:1px solid var(--glass-border);padding-top:2.5rem;">
+            <p style="font-family:var(--font-display);font-style:italic;font-size:1.1rem;color:var(--white-muted);max-width:580px;margin:0 auto;">
+                "I'd rather ship something that works than talk about something that might."
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+SERVICES / SKILLS
+═══════════════════════════════════════════════ -->
+<section class="jn-section jn-section--alt anchor-offset" id="services">
+    <div class="container-fluid px-4 px-lg-5">
+
+        <div class="jn-section__header" data-aos="fade-up">
+            <span class="jn-label">What I Offer</span>
+            <h2 class="jn-section__title">Services &amp; <em>Capabilities</em></h2>
+            <div class="jn-rule"></div>
+            <p class="jn-section__desc">
+                End-to-end development from concept to launch. I design, build, and deploy
+                systems that actually work in production.
+            </p>
+        </div>
+
+        <div class="jn-services__grid">
+
+            <div class="jn-service-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="jn-service-card__icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <h4>Frontend Development</h4>
+                <p>Responsive, modern interfaces built with React, Bootstrap, and JavaScript.</p>
+            </div>
+
+            <div class="jn-service-card" data-aos="fade-up" data-aos-delay="150">
+                <div class="jn-service-card__icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <h4>Full-Stack Development</h4>
+                <p>PHP, Node.js, MySQL, and REST APIs — production-grade systems, built to run.</p>
+            </div>
+
+            <div class="jn-service-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="jn-service-card__icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                </div>
+                <h4>AI-Powered Features</h4>
+                <p>Integrating AI APIs (OpenAI, Gemini) for automation, assistants, and smarter UX.</p>
+            </div>
+
+            <div class="jn-service-card" data-aos="fade-up" data-aos-delay="250">
+                <div class="jn-service-card__icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M8 2v20M16 2v20M2 8h20M2 16h20"/></svg>
+                </div>
+                <h4>Mobile Apps</h4>
+                <p>Flutter / Dart — cross-platform apps with a native feel.</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+PROJECTS
+═══════════════════════════════════════════════ -->
+<section class="jn-section anchor-offset" id="projects">
+    <div class="container-fluid px-4 px-lg-5">
+
+        <div class="jn-section__header" data-aos="fade-up">
+            <span class="jn-label">Case Studies</span>
+            <h2 class="jn-section__title">The Product <em>Engines</em></h2>
+            <div class="jn-rule"></div>
+            <p class="jn-section__desc">
+                Three real products, engineered from scratch. Click <em style="color:var(--tan)">View Live Product</em> to see the full interactive demo.
+            </p>
+        </div>
+
+        <div class="jn-projects__grid">
+
+            <!-- EMOL -->
+            <div class="jn-project" data-aos="fade-up" data-aos-delay="100">
+                <div class="jn-project__num">01</div>
+                <div class="jn-project__type">B2B SaaS · Lead Generation</div>
+                <h3>EMOL</h3>
+                <div class="jn-project__sub">The B2B Client Acquisition Engine</div>
+                <p class="jn-project__desc">
+                    A PHP/MySQL system that finds qualified leads via Google Maps and uses AI
+                    to send personalized, high-converting outreach in a single click.
+                </p>
+                <div class="jn-stack">
+                    <span class="jn-stack__pill">PHP Core</span>
+                    <span class="jn-stack__pill">MySQL</span>
+                    <span class="jn-stack__pill">OpenAI API</span>
+                    <span class="jn-stack__pill">REST Routing</span>
+                    <span class="jn-stack__pill">Lead Filtering</span>
+                </div>
+                <a href="project.html#emol" class="jn-project__link">
+                    <span>View Live Product</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+
+            <!-- TEMPLIX -->
+            <div class="jn-project" data-aos="fade-up" data-aos-delay="200">
+                <div class="jn-project__num">02</div>
+                <div class="jn-project__type">Mobile App · Design Studio</div>
+                <h3>TEMPLIX</h3>
+                <div class="jn-project__sub">The Mobile Design Studio</div>
+                <p class="jn-project__desc">
+                    A Flutter production app delivering superior text and typography handling —
+                    evolved from a web prototype to a full native mobile experience.
+                </p>
+                <div class="jn-stack">
+                    <span class="jn-stack__pill">Flutter</span>
+                    <span class="jn-stack__pill">Dart</span>
+                    <span class="jn-stack__pill">State Management</span>
+                    <span class="jn-stack__pill">Custom Widgets</span>
+                    <span class="jn-stack__pill">Mobile-First</span>
+                </div>
+                <a href="project.html#templix" class="jn-project__link">
+                    <span>View Live Product</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+
+            <div class="jn-project" data-aos="fade-up" data-aos-delay="300">
+                <div class="jn-project__num">03</div>
+                <div class="jn-project__type">Restaurant Management · Real-Time Ops</div>
+                <h3>PEACESPOT</h3>
+                <div class="jn-project__sub">The Nigerian Restaurant Operating System</div>
+                <p class="jn-project__desc">
+                    A full PHP/MySQL restaurant platform with live order tracking, loyalty rewards,
+                    push notifications, and Nara — an AI ordering assistant built on the Gemini API.
+                </p>
+                <div class="jn-stack">
+                    <span class="jn-stack__pill">PHP</span>
+                    <span class="jn-stack__pill">MySQL</span>
+                    <span class="jn-stack__pill">Gemini API</span>
+                    <span class="jn-stack__pill">Web Push</span>
+                    <span class="jn-stack__pill">Service Workers</span>
+                </div>
+                <a href="project.html#peacespot" class="jn-project__link">
+                    <span>View Live Product</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+CONTACT
+═══════════════════════════════════════════════ -->
+<section class="jn-section jn-section--alt anchor-offset" id="contact">
+    <div class="container-fluid px-4 px-lg-5">
+
+        <div class="jn-contact__wrap">
+
+            <!-- Left -->
+            <div data-aos="fade-right">
+                <span class="jn-label">Work With Me</span>
+                <h2 class="jn-section__title mt-1">
+                    Let's build something <em>impressive.</em>
+                </h2>
+                <div class="jn-rule"></div>
+                <p class="jn-contact__intro">
+                    I work with founders, startups, and ambitious brands who want more than
+                    a website — they want a revenue engine. Every project starts with a
+                    vision. Tell me yours.
+                </p>
+                <div class="jn-contact__socials">
+                    <a href="https://github.com" target="_blank" rel="noopener" class="jn-contact__social">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                        GitHub
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener" class="jn-contact__social">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                        LinkedIn
+                    </a>
+                    <a href="https://dribbble.com" target="_blank" rel="noopener" class="jn-contact__social">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+                        Dribbble
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Form (static HTML) -->
+            <div data-aos="fade-left">
+
+                <form action="#" method="POST" class="jn-form" id="contactForm" novalidate>
+
+                    <div class="row g-3">
+                        <div class="col-12 col-sm-6">
+                            <div class="jn-form__group">
+                                <label class="jn-form__label" for="name">Full Name</label>
+                                <input class="jn-form__input" type="text" id="name" name="name"
+                                placeholder="Your name" required />
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="jn-form__group">
+                                <label class="jn-form__label" for="email">Email Address</label>
+                                <input class="jn-form__input" type="email" id="email" name="email"
+                                placeholder="you@company.com" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="jn-form__group mt-2">
+                        <label class="jn-form__label" for="vision">Your Vision</label>
+                        <select class="jn-form__input" id="vision" name="vision" required>
+                            <option value="" disabled selected>E-commerce, B2B, Creative…</option>
+                            <option value="ecommerce">E-commerce Platform</option>
+                            <option value="b2b">B2B SaaS / Lead System</option>
+                            <option value="creative">Creative / Portfolio</option>
+                            <option value="ai-app">AI-Powered Application</option>
+                            <option value="mobile">Mobile App (Flutter)</option>
+                        </select>
+                    </div>
+
+                    <div class="jn-form__group mt-2">
+                        <label class="jn-form__label" for="goal">Primary Goal</label>
+                        <select class="jn-form__input" id="goal" name="goal" required>
+                            <option value="" disabled selected>What do you want to achieve?</option>
+                            <option value="revenue">Increase Revenue / Sales</option>
+                            <option value="leads">Automate Lead Generation</option>
+                            <option value="product">Build a Digital Product</option>
+                            <option value="brand">Establish Brand Online</option>
+                        </select>
+                    </div>
+
+                    <div class="jn-form__group mt-2">
+                        <label class="jn-form__label" for="message">Tell Me More</label>
+                        <textarea class="jn-form__input jn-form__textarea" id="message" name="message"
+                        placeholder="Share your idea, timeline, or budget…" required></textarea>
+                    </div>
+
+                    <button type="submit" class="jn-btn jn-btn--primary w-100 mt-3">
+                        Send It
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+
+                    <!-- Form feedback (static demo) -->
+                    <div id="formFeedback" style="margin-top:.8rem;font-size:.8rem;color:var(--white-faint);text-align:center;"></div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+FOOTER
+═══════════════════════════════════════════════ -->
+<footer class="jn-footer">
+    <div class="container-fluid px-4 px-lg-5">
+        <div class="jn-footer__inner">
+            <span class="jn-footer__logo">Justin.</span>
+            <span class="jn-footer__copy">&copy; 2026 Muomaife Justin. All rights reserved.</span>
+            <div class="jn-footer__links">
+                <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════
+SCRIPTS
+═══════════════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js">
+</script>
+
+<script>
+    // ── AOS ──
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 40,
+        easing: 'ease-out-cubic',
+    });
+
+    // ── Scroll rail ──
+    const sections = document.querySelectorAll('.anchor-offset, #hero');
+    const dots = document.querySelectorAll('.jn-scroll-rail__dot');
+
+    function updateRail() {
+        const scrollY = window.scrollY + 120;
+        let activeIdx = 0;
+        sections.forEach((sec, i) => {
+            const top = sec.offsetTop;
+            const height = sec.offsetHeight;
+            if (scrollY >= top && scrollY < top + height) {
+                activeIdx = i;
+            }
+        });
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === activeIdx);
+        });
+    }
+
+    window.addEventListener('scroll', updateRail);
+    window.addEventListener('resize', updateRail);
+    setTimeout(updateRail, 300);
+
+    // ── Nav background on scroll ──
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Contact form (static demo) ──
+    const form = document.getElementById('contactForm');
+    const feedback = document.getElementById('formFeedback');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const vision = document.getElementById('vision').value;
+        const goal = document.getElementById('goal').value;
+        const message = document.getElementById('message').value.trim();
+
+        if (!name || !email || !vision || !goal || !message) {
+            feedback.innerHTML =
+                '<span style="color:#ff6b6b;">Please fill in all fields before sending.</span>';
+            return;
+        }
+
+        if (!email.includes('@') || !email.includes('.')) {
+            feedback.innerHTML = '<span style="color:#ff6b6b;">Please enter a valid email address.</span>';
+            return;
+        }
+
+        if (message.length < 10) {
+            feedback.innerHTML =
+                '<span style="color:#ff6b6b;">Your message is too short. Tell me a bit more about your vision.</span>';
+            return;
+        }
+
+        feedback.innerHTML = '<span style="color:#00e5a0;">✓ Message received. I\'ll be in touch within 24 hours.</span>';
+        form.reset();
+
+        // Clear feedback after 6s
+        setTimeout(() => {
+            feedback.innerHTML = '';
+        }, 6000);
+    });
+
+    // ── Smooth anchor clicks ──
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                const offset = 80;
+                const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                window.scrollTo({ top, behavior: 'smooth' });
+                // Close mobile nav
+                const navCollapse = document.getElementById('navMenu');
+                if (navCollapse.classList.contains('show')) {
+                    const toggler = document.querySelector('.jn-hamburger');
+                    toggler.click();
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
