@@ -52,6 +52,16 @@
         html {
             scroll-behavior: smooth;
             font-size: 16px;
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        img, svg, video {
+            max-width: 100%;
+            height: auto;
+        }
+        h1, h2, h3, h4, p, span, a {
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
         body {
             background: var(--navy-deep);
@@ -767,6 +777,61 @@
             }
             .jn-project {
                 padding: 1.4rem;
+            }
+        }
+        @media(max-width:400px) {
+            .jn-nav {
+                padding: .9rem 1rem;
+            }
+            .jn-nav__logo {
+                font-size: 1.1rem;
+            }
+            .jn-hero__headline {
+                font-size: 1.9rem;
+            }
+            .jn-eyebrow {
+                font-size: .62rem;
+                gap: .5rem;
+            }
+            .jn-eyebrow__line {
+                width: 16px;
+            }
+            .jn-hero__sub {
+                font-size: .85rem;
+            }
+            .jn-hero__stats {
+                gap: .9rem 1.4rem;
+            }
+            .jn-stat-item__num {
+                font-size: 1.5rem;
+            }
+            .jn-stat-item__label {
+                font-size: .6rem;
+            }
+            .jn-section {
+                padding: 2.5rem .8rem;
+            }
+            .jn-section__title {
+                font-size: 1.6rem;
+            }
+            .jn-about__pill {
+                font-size: .68rem;
+                padding: .3rem .6rem;
+            }
+            .jn-project {
+                padding: 1.1rem;
+            }
+            .jn-service-card {
+                padding: 1.5rem 1.1rem;
+            }
+            .jn-form__input {
+                font-size: .85rem;
+                padding: .6rem .8rem;
+            }
+            .jn-footer__inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: .8rem;
             }
         }
 

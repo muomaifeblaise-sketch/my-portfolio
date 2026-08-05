@@ -23,7 +23,12 @@
   --font-body:'DM Sans',system-ui,sans-serif;
   --easing:cubic-bezier(.4,0,.2,1);--trans:.3s var(--easing);
 }
-html{scroll-behavior:smooth;font-size:16px}
+html{scroll-behavior:smooth;font-size:16px;overflow-x:hidden;max-width:100%}
+img,svg,video{max-width:100%;height:auto}
+.product-name,.product-cat,.product-desc,.product-block p,.product-feature,
+.jn-hero__headline,.p-hero__title,.video-card__name,.video-card__desc{
+  overflow-wrap:break-word;word-break:break-word;
+}
 body{background:var(--navy-deep);color:var(--white);font-family:var(--font-body);font-weight:300;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 body.is-loading{overflow:hidden}
 
@@ -1228,6 +1233,26 @@ ul{list-style:none;padding:0;margin:0}
   .ps-two-col>*:last-child,.ps-hunt-grid .ps-biz:nth-child(n+3){display:none}
   .ps-stat-row,.ps-analytics-stats{grid-template-columns:1fr}
 }
+@media(max-width:400px){
+  .p-nav{padding:.9rem 1rem}
+  .p-nav__brand{font-size:1rem}
+  .p-nav__back span{display:none}
+  .p-hero{padding:6.5rem 1rem 3rem}
+  .p-hero__title{font-size:2.1rem}
+  .p-hero__sub{font-size:.82rem}
+  .product-section{padding:3rem 1rem 2.5rem}
+  .product-num{font-size:2.2rem}
+  .product-cat{font-size:.58rem;letter-spacing:.14em}
+  .product-stack{gap:.35rem}
+  .product-pill{font-size:.62rem;padding:.25rem .65rem}
+  .product-features{column-gap:1rem}
+  .demo-tabs{gap:4px}
+  .dtab{padding:6px 10px;font-size:.68rem}
+  .browser-body{height:210px}
+  .video-card__footer{flex-direction:column;align-items:flex-start;gap:.5rem}
+  .video-card__play-btn{width:44px;height:44px}
+  .p-footer{flex-direction:column;align-items:flex-start;gap:1rem}
+}
 </style>
 </head>
 <body class="is-loading">
@@ -1248,7 +1273,7 @@ ul{list-style:none;padding:0;margin:0}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M19 12H5M12 19l-7-7 7-7"/>
     </svg>
-    Back to Portfolio
+    <span>Back to Portfolio</span>
   </a>
   <span class="p-nav__brand">Product Engines</span>
 </nav>
