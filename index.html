@@ -201,16 +201,6 @@
             padding: 8rem clamp(1.25rem, 5vw, 5rem) 4rem;
             overflow: hidden;
         }
-        .jn-hero__grid {
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(210, 180, 140, .035) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(210, 180, 140, .035) 1px, transparent 1px);
-            background-size: 60px 60px;
-            pointer-events: none;
-            z-index: 0;
-        }
         .jn-hero__content {
             position: relative;
             z-index: 1;
@@ -893,15 +883,13 @@ SCROLL RAIL
 HERO
 ═══════════════════════════════════════════════ -->
 <section class="jn-hero" id="hero">
-    <div class="jn-hero__grid" aria-hidden="true"></div>
-
     <div class="container-fluid px-4 px-lg-5">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-8 text-center jn-hero__content">
 
                 <p class="jn-eyebrow" data-aos="fade-down" data-aos-duration="700">
                     <span class="jn-eyebrow__line"></span>
-                    Full-Stack Developer &amp; Vibecoder
+                    Full-Stack Developer
                     <span class="jn-eyebrow__line"></span>
                 </p>
 
@@ -911,9 +899,9 @@ HERO
                 </h1>
 
                 <p class="jn-hero__sub" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
-                    I build complete, working web applications — from database to interface —
-                    using PHP, React, Node.js, and modern JavaScript. Currently studying Software
-                    Engineering at Lincoln University Malaysia, Nigeria branch.
+                    I work efficiently and deliver well-built digital products — from database to interface —
+                    using PHP, React, Node.js, and modern JavaScript. I also founded Authen Tech,
+                    a technology company focused on practical, high-impact solutions.
                 </p>
 
                 <div class="jn-hero__ctas d-flex flex-wrap gap-3 justify-content-center"
@@ -973,11 +961,9 @@ ABOUT
                     Bootstrap, and HTML.
                 </p>
                 <p>
-                    I describe myself as a vibecoder: I move fast and lean on AI tools to speed up
-                    development, but every project I take on ships as a fully working system, not
-                    just a prototype. My work spans lead-generation platforms, restaurant management
-                    systems, e-commerce sites, and mobile apps — built for real clients and deployed
-                    to production.
+                    I work efficiently, I deliver well, and I build products that are ready to solve
+                    real problems. Every product I ship is a complete system designed to perform,
+                    not just a concept on paper.
                 </p>
                 <div style="margin-top:1.2rem;">
                     <span class="jn-about__pill">PHP</span>
@@ -1002,12 +988,12 @@ ABOUT
                 </div>
 
                 <div class="jn-about__dual-item">
-                    <div class="tag">✦ Speed &amp; AI-Assisted Workflow</div>
-                    <h4>Vibecoding, Seriously</h4>
+                    <div class="tag">✦ Efficiency &amp; Delivery</div>
+                    <h4>I work efficiently</h4>
                     <p>
-                        I use AI tools to move faster without cutting corners. Every product I ship —
-                        from lead-generation platforms to restaurant management systems — is a
-                        complete, working system, not a proof of concept.
+                        I focus on speed without sacrificing quality. Every product I ship — from
+                        lead-generation platforms to restaurant management systems — is built to work,
+                        perform, and deliver real value.
                     </p>
                 </div>
 
@@ -1063,8 +1049,8 @@ SERVICES / SKILLS
                 <div class="jn-service-card__icon">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
                 </div>
-                <h4>AI-Powered Features</h4>
-                <p>Integrating AI APIs (OpenAI, Gemini) for automation, assistants, and smarter UX.</p>
+                <h4>Efficient Product Systems</h4>
+                <p>Building practical digital systems that improve operations, automate workflows, and deliver results.</p>
             </div>
 
             <div class="jn-service-card" data-aos="fade-up" data-aos-delay="250">
@@ -1104,20 +1090,19 @@ PROJECTS
                 <h3>EMOL</h3>
                 <div class="jn-project__sub">The B2B Client Acquisition Engine</div>
                 <p class="jn-project__desc">
-                    A PHP/MySQL system that finds qualified leads via Google Maps and uses AI
-                    to send personalized, high-converting outreach in a single click.
+                    A PHP/MySQL system that finds qualified leads via Google Maps and supports
+                    personalized, high-converting outreach in a single click.
                 </p>
                 <div class="jn-stack">
                     <span class="jn-stack__pill">PHP Core</span>
                     <span class="jn-stack__pill">MySQL</span>
-                    <span class="jn-stack__pill">OpenAI API</span>
+                    <span class="jn-stack__pill">Lead Automation</span>
                     <span class="jn-stack__pill">REST Routing</span>
                     <span class="jn-stack__pill">Lead Filtering</span>
                 </div>
-                <a href="project.html#emol" class="jn-project__link">
-                    <span>View Live Product</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                    <a href="project.html#emol" class="jn-btn jn-btn--primary">View Live Product</a>
+                </div>
             </div>
 
             <!-- TEMPLIX -->
@@ -1137,10 +1122,9 @@ PROJECTS
                     <span class="jn-stack__pill">Custom Widgets</span>
                     <span class="jn-stack__pill">Mobile-First</span>
                 </div>
-                <a href="project.html#templix" class="jn-project__link">
-                    <span>View Live Product</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                    <a href="project.html#templix" class="jn-btn jn-btn--primary">View Live Product</a>
+                </div>
             </div>
 
             <div class="jn-project" data-aos="fade-up" data-aos-delay="300">
@@ -1150,19 +1134,18 @@ PROJECTS
                 <div class="jn-project__sub">The Nigerian Restaurant Operating System</div>
                 <p class="jn-project__desc">
                     A full PHP/MySQL restaurant platform with live order tracking, loyalty rewards,
-                    push notifications, and Nara — an AI ordering assistant built on the Gemini API.
+                    push notifications, and streamlined ordering workflows built for fast service.
                 </p>
                 <div class="jn-stack">
                     <span class="jn-stack__pill">PHP</span>
                     <span class="jn-stack__pill">MySQL</span>
-                    <span class="jn-stack__pill">Gemini API</span>
+                    <span class="jn-stack__pill">Order Flow</span>
                     <span class="jn-stack__pill">Web Push</span>
                     <span class="jn-stack__pill">Service Workers</span>
                 </div>
-                <a href="project.html#peacespot" class="jn-project__link">
-                    <span>View Live Product</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                    <a href="project.html#peacespot" class="jn-btn jn-btn--primary">View Live Product</a>
+                </div>
             </div>
 
         </div>
@@ -1235,7 +1218,7 @@ CONTACT
                             <option value="ecommerce">E-commerce Platform</option>
                             <option value="b2b">B2B SaaS / Lead System</option>
                             <option value="creative">Creative / Portfolio</option>
-                            <option value="ai-app">AI-Powered Application</option>
+                            <option value="custom-platform">Custom Business Platform</option>
                             <option value="mobile">Mobile App (Flutter)</option>
                         </select>
                     </div>
@@ -1280,7 +1263,7 @@ FOOTER
     <div class="container-fluid px-4 px-lg-5">
         <div class="jn-footer__inner">
             <span class="jn-footer__logo">Justin.</span>
-            <span class="jn-footer__copy">&copy; 2026 Muomaife Justin. All rights reserved.</span>
+            <span class="jn-footer__copy">&copy; 2026 Authen Tech. All rights reserved.</span>
             <div class="jn-footer__links">
                 <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
